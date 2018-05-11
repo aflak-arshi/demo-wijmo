@@ -1,0 +1,39 @@
+<div class="card" style="height: 465px;">
+  <div *ngIf="config.hasHeader" class="card-header">
+    <div class="flex-display">
+      <h4 class="card-title">{{ config.title }}</h4>
+      <form *ngIf="config.allowSearch" class="float-right" role="search">
+        <div class="position-relative has-icon-right">
+          <input type="text" class="form-control round" placeholder="Search">
+          <div class="form-control-position">
+            <i class="ft-search"></i>
+          </div>
+
+        </div>
+      </form>
+      <div *ngIf="config.headerActions">
+        <a *ngFor="let item of config.headerActions" (click)="item.command">
+          <i [ngClass]="item.icon"></i>
+          <p class="d-none">{{ item.name }}</p>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-body">
+    <wj-list-box [itemsSource]="config.data">
+      <ng-template wjItemTemplate let-item="item" let-itemIndex="itemIndex">
+        {{item.name}}
+        <div *ngIf="item.icon" [wjTooltip]="'#fineprint'">
+          {{item.icon}}
+        </div>
+        <div id="fineprint" style="display:none">
+          <p>{{item.tooltip}}</p>
+        </div>
+
+      </ng-template>
+
+    </wj-list-box>
+  </div>
+
+</div>
